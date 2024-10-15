@@ -1,32 +1,32 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
 
 const SignUp = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   const initialState = {
     name: '',
     email: '',
     password: '',
     confirmPassword: ''
-  };
-  
-  const [formValues, setFormValues] = useState(initialState);
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
+  }
+
+  const [formValues, setFormValues] = useState(initialState)
+  const [error, setError] = useState('')
+  const [success, setSuccess] = useState('')
 
   const handleChange = (e) => {
-    setFormValues({ ...formValues, [e.target.name]: e.target.value });
-  };
+    setFormValues({ ...formValues, [e.target.name]: e.target.value })
+  }
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
     // Check if passwords match
     if (formValues.password !== formValues.confirmPassword) {
-      setError('Passwords do not match!');
-      return;
+      setError('Passwords do not match!')
+      return
     }
 
     try {
@@ -35,16 +35,16 @@ const SignUp = () => {
         name: formValues.name,
         email: formValues.email,
         password: formValues.password
-      });
+      })
 
-      setSuccess(response.data.message); // Display success message
-      setError(''); // Clear error message
-      setFormValues(initialState); // Reset form
-      navigate('/signin'); // Redirect to SignIn page
+      setSuccess(response.data.message) // Display success message
+      setError('') // Clear error message
+      setFormValues(initialState) // Reset form
+      navigate('/signin') // Redirect to SignIn page
     } catch (err) {
-      setError(err.response?.data?.message || 'Error signing up.'); // Handle error response
+      setError(err.response?.data?.message || 'Error signing up.') // Handle error response
     }
-  };
+  }
 
   return (
     <div className="signup col">
@@ -107,14 +107,15 @@ const SignUp = () => {
               formValues.password !== formValues.confirmPassword
             }
           >
-          <header>
-          Register
-          </header>
+            <header>Register</header>
           </button>
         </form>
+        <p>
+          Already have an account? <a href="/signin">Sign In</a>
+        </p>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default SignUp;
+export default SignUp

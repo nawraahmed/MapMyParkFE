@@ -1,4 +1,3 @@
-
 /* TicketStyles.css */
 
 body {
@@ -106,9 +105,8 @@ select {
 select option {
   padding: 10px;
   color: #333; /* Dark gray for options */
-=======
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
-
+  @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
+}
 :root {
   --primary-bg: #000411;
   --link-color-primary: #aeb7b3;
@@ -301,7 +299,6 @@ form button:disabled {
   justify-content: center;
   align-items: center;
   height: 80vh;
-
 }
 
 .mainContentSize {
