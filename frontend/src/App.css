@@ -1,4 +1,108 @@
+/* TicketStyles.css */
+
 body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f4; /* Light background for contrast */
   margin: 0;
-  box-sizing: border-box;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  color: #1a1a1a; /* Dark gray for better contrast */
+  margin-bottom: 20px;
+}
+
+form {
+  background-color: #001f3f; /* Navy background */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+  max-width: 400px;
+  margin: 0 auto 20px auto;
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: #ff6f61; /* Pink color for labels */
+}
+
+input[type='text'],
+select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: border-color 0.3s;
+}
+
+input[type='text']:focus,
+select:focus {
+  border-color: #ff6f61; /* Pink border on focus */
+  outline: none;
+}
+
+button {
+  background-color: #ff6f61; /* Pink background for buttons */
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  width: 100%;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+  background-color: #e95f51; /* Darker pink on hover */
+  transform: scale(1.05);
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  background-color: #e4e4e4; /* Light gray for list items */
+  margin-bottom: 10px;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: transform 0.3s;
+}
+
+li:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+li button {
+  background-color: #dc3545; /* Red background for delete button */
+}
+
+li button:hover {
+  background-color: #c82333; /* Darker red on hover */
+}
+
+.ticket-info {
+  font-size: 16px;
+  color: #333; /* Dark gray for ticket info */
+}
+
+/* Additional Styles for Ticket Types Dropdown */
+select {
+  background-color: #ffffff; /* White background for dropdown */
+}
+
+select option {
+  padding: 10px;
+  color: #333; /* Dark gray for options */
 }
