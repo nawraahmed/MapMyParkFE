@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const API_URL = 'http://localhost:4000/api/tickets' // Update this if your server runs on a different port
+const API_URL = 'http://localhost:4000/api/tickets'
 
 const ticketApi = {
   createTicket: (ticketData) => axios.post(API_URL, ticketData),

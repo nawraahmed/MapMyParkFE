@@ -6,22 +6,21 @@ const TicketForm = ({ onCreate }) => {
   const [holderName, setHolderName] = useState('')
   const [ticketType, setTicketType] = useState('Adult') // Default to "Adult"
 
-  const createTicket = async (e) => {
-    e.preventDefault() // Prevent form submission from refreshing the page
+  const createTicket = async () => {
+    const ticketData = {
+      holderName: holderName,
+      ticketType: ticketType, // Ensure this matches what the server expects
+      issueDate: new Date().toISOString() // Make sure the date is in the correct format
+    }
 
     try {
-      const newTicket = {
-        holderName,
-        ticketType
-        // The issueDate can be generated on the backend
-      }
-
-      const response = await ticketApi.createTicket(newTicket) // Create ticket API call
-      onCreate(response.data) // Pass the new ticket back to TicketList
-      setHolderName('') // Reset form field
-      setTicketType('Adult') // Reset dropdown to default
+      const response = await ticketApi.createTicket(ticketData)
+      onCreate(response.data)
+      setHolderName('') // Clear form after submission
+      setTicketType('Adult') // Reset to default value
     } catch (error) {
       console.error('Error creating ticket:', error)
+      // You can add additional error handling here if needed
     }
   }
 

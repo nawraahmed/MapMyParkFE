@@ -2,6 +2,7 @@
 import React from 'react'
 import axios from 'axios'
 import '../App.css'
+import TicketList from './TicketList'
 
 const TicketItem = ({ ticket }) => {
   const handleDelete = async () => {
@@ -15,10 +16,7 @@ const TicketItem = ({ ticket }) => {
 
   return (
     <div>
-      <h3>{ticket.holderName}</h3>
-      <p>Ticket Type: {ticket.ticketType}</p>
-      <p>Issue Date: {new Date(ticket.issueDate).toLocaleDateString()}</p>
-      <button onClick={handleDelete}>Delete Ticket</button>
+      <TicketList onDelete={handleDelete} />
     </div>
   )
 }
