@@ -1,7 +1,13 @@
+import Header from './Header'
+import Map from './Map'
+
 const MainContent = () => {
   return (
-    <div>
-      <h1>Main Content</h1>
+    <div className="mainContentSize">
+      {/* Mount the header here */}
+      <Header />
+      {/* Main content */}
+      <Map />
     </div>
   )
 }
