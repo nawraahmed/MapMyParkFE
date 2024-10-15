@@ -1,26 +1,27 @@
-
-import './App.css';
-import { useState, useEffect } from 'react';
-import { Route, Routes, useNavigate } from 'react-router';
-import SignIn from './components/SignIn';
-import SignUp from './components/SignUp';
+import './App.css'
+import { useState, useEffect } from 'react'
+import { Route, Routes, useNavigate, Navigate } from 'react-router-dom'
+import SignIn from './components/SignIn'
+import SignUp from './components/SignUp'
+import MainContent from './components/MainContent'
+import TicketList from './components/TicketList' // Adjust the path if necessary
 
 const App = () => {
-  const [user, setUser] = useState(null);
-  const navigate = useNavigate();
+  const [user, setUser] = useState(null)
+  const navigate = useNavigate()
 
   useEffect(() => {
-    const storedUser = localStorage.getItem('user');
+    const storedUser = localStorage.getItem('user')
     if (storedUser) {
-      setUser(JSON.parse(storedUser));
+      setUser(JSON.parse(storedUser))
     }
-  }, []);
+  }, [])
 
   const handleLogOut = () => {
-    setUser(null);
-    localStorage.clear();
-    navigate('/signin');
-  };
+    setUser(null)
+    localStorage.clear()
+    navigate('/signin')
+  }
 
   return (
     <div className="App">
@@ -36,13 +37,19 @@ const App = () => {
       </header>
       <main>
         <Routes>
+          <Route path="/" element={<Navigate to="/signup" />} />
+          <Route path="/MainContent" element={<MainContent />} />
+
           <Route path="/signin" element={<SignIn setUser={setUser} />} />
           <Route path="/signup" element={<SignUp />} />
+          {user && (
+            <Route path="/tickets" element={<TicketList />} /> // Route for TicketList
+          )}
+          {/* Redirect to the ticket list after signing in */}
         </Routes>
       </main>
     </div>
-  );
-};
+  )
+}
 
-export default App;
-
+export default App

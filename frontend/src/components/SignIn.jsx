@@ -1,29 +1,33 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
 
 const SignIn = ({ setUser }) => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
-  const initialState = { email: '', password: '' };
-  const [formValues, setFormValues] = useState(initialState);
-  const [error, setError] = useState('');
+  const initialState = { email: '', password: '' }
+  const [formValues, setFormValues] = useState(initialState)
+  const [error, setError] = useState('')
 
   const handleChange = (e) => {
-    setFormValues({ ...formValues, [e.target.name]: e.target.value });
-  };
+    setFormValues({ ...formValues, [e.target.name]: e.target.value })
+  }
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
     try {
-      const response = await axios.post('http://localhost:4000/auth/login', formValues);
-      setUser(response.data.user);
-      localStorage.setItem('user', JSON.stringify(response.data.user)); // Store user in localStorage
-      navigate('/MainContent'); // Navigate to main content page
+      const response = await axios.post(
+        'http://localhost:4000/auth/login',
+        formValues
+      )
+      const { token, user } = response.data
+      localStorage.setItem('token', token) // Store JWT token
+      setUser(user)
+      navigate('/MainContent')
     } catch (err) {
-      setError('Invalid email or password'); // Display error message on failure
+      setError('Invalid email or password')
     }
-  };
+  }
 
   return (
     <div className="signin col">
@@ -55,9 +59,12 @@ const SignIn = ({ setUser }) => {
             Sign In
           </button>
         </form>
+        <p>
+          Don't have an account? <a href="/signup">Sign Up</a>
+        </p>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default SignIn;
+export default SignIn

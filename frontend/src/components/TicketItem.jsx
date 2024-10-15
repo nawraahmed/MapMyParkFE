@@ -1,14 +1,12 @@
-// src/components/TicketItem.js
 import React from 'react'
 import axios from 'axios'
 import '../App.css'
-import TicketList from './TicketList'
 
-const TicketItem = ({ ticket }) => {
+const TicketItem = ({ ticket, onDelete }) => {
   const handleDelete = async () => {
     try {
-      await axios.delete(`/api/tickets/${ticket._id}`)
-      window.location.reload() // Reload the page after deletion
+      await axios.delete(`http://localhost:4000/api/tickets/${ticket._id}`)
+      onDelete(ticket._id) // Call onDelete to remove the ticket from the list
     } catch (err) {
       console.log('Error deleting ticket:', err)
     }
@@ -16,7 +14,11 @@ const TicketItem = ({ ticket }) => {
 
   return (
     <div>
-      <TicketList onDelete={handleDelete} />
+      <p>
+        {ticket.holderName} - {ticket.ticketType} (Issued on{' '}
+        {new Date(ticket.issueDate).toLocaleDateString()})
+        <button onClick={handleDelete}>Delete</button>
+      </p>
     </div>
   )
 }
