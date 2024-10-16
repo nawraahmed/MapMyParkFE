@@ -1,6 +1,6 @@
 import './App.css';
 import { useState, useEffect } from 'react';
-import { Route, Routes, useNavigate } from 'react-router';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
 
@@ -9,15 +9,17 @@ const App = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    const token = localStorage.getItem('authToken');
     const storedUser = localStorage.getItem('user');
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
+
+    if (token && storedUser) {
+      setUser(JSON.parse(storedUser)); 
     }
   }, []);
 
   const handleLogOut = () => {
     setUser(null);
-    localStorage.clear();
+    localStorage.clear(); 
     navigate('/signin');
   };
 
@@ -33,6 +35,7 @@ const App = () => {
           <p>Please sign in or sign up</p>
         )}
       </header>
+
       <main>
         <Routes>
           <Route path="/signin" element={<SignIn setUser={setUser} />} />

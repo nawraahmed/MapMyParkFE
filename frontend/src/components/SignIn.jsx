@@ -4,9 +4,7 @@ import axios from 'axios';
 
 const SignIn = ({ setUser }) => {
   const navigate = useNavigate();
-
-  const initialState = { email: '', password: '' };
-  const [formValues, setFormValues] = useState(initialState);
+  const [formValues, setFormValues] = useState({ email: '', password: '' });
   const [error, setError] = useState('');
 
   const handleChange = (e) => {
@@ -15,13 +13,20 @@ const SignIn = ({ setUser }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
-      const response = await axios.post('http://localhost:4000/auth/login', formValues);
-      setUser(response.data.user);
-      localStorage.setItem('user', JSON.stringify(response.data.user)); // Store user in localStorage
-      navigate('/MainContent'); // Navigate to main content page
+      const res = await axios.post('http://localhost:4000/auth/login', formValues);
+      const { token, user } = res.data;
+
+      // Store token and user in localStorage
+      localStorage.setItem('authToken', token);
+      localStorage.setItem('user', JSON.stringify(user));
+
+      setUser(user); // Set user state
+      navigate('/'); // Redirect to homepage or dashboard
     } catch (err) {
-      setError('Invalid email or password'); // Display error message on failure
+      console.error('Sign-in failed:', err.response?.data || err.message);
+      setError(err.response?.data?.message || 'Invalid credentials');
     }
   };
 
@@ -32,21 +37,21 @@ const SignIn = ({ setUser }) => {
           <div className="input-wrapper">
             <label htmlFor="email">Email</label>
             <input
-              onChange={handleChange}
-              name="email"
               type="email"
+              name="email"
               placeholder="example@example.com"
               value={formValues.email}
+              onChange={handleChange}
               required
             />
           </div>
           <div className="input-wrapper">
             <label htmlFor="password">Password</label>
             <input
-              onChange={handleChange}
               type="password"
               name="password"
               value={formValues.password}
+              onChange={handleChange}
               required
             />
           </div>
