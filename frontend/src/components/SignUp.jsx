@@ -56,7 +56,7 @@ const SignUp = () => {
               onChange={handleChange}
               name="name"
               type="text"
-              placeholder="John Smith"
+              placeholder="Name"
               value={formValues.name}
               required
             />
@@ -80,6 +80,7 @@ const SignUp = () => {
               onChange={handleChange}
               type="password"
               name="password"
+              placeholder="Password"
               value={formValues.password}
               required
             />
@@ -91,6 +92,7 @@ const SignUp = () => {
               onChange={handleChange}
               type="password"
               name="confirmPassword"
+              placeholder="Confirm Password"
               value={formValues.confirmPassword}
               required
             />
@@ -99,7 +101,12 @@ const SignUp = () => {
           {error && <p style={{ color: 'red' }}>{error}</p>}
           {success && <p style={{ color: 'green' }}>{success}</p>}
 
+          <p>
+            Already have an account? <a href="/signin">Sign In</a>
+          </p>
+
           <button
+            className="btn"
             disabled={
               !formValues.name ||
               !formValues.email ||
@@ -107,12 +114,9 @@ const SignUp = () => {
               formValues.password !== formValues.confirmPassword
             }
           >
-            <header>Register</header>
+            Register
           </button>
         </form>
-        <p>
-          Already have an account? <a href="/signin">Sign In</a>
-        </p>
       </div>
     </div>
   )

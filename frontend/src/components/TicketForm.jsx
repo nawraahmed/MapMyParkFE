@@ -29,19 +29,20 @@ const TicketForm = ({ onCreate }) => {
   }
 
   return (
-    <form onSubmit={createTicket}>
-      <div>
+    <form className="col" onSubmit={createTicket}>
+      <div className="input-wrapper">
         <label>
           Holder Name:
           <input
             type="text"
             value={holderName}
+            placeholder="Holder Name"
             onChange={(e) => setHolderName(e.target.value)}
             required
           />
         </label>
       </div>
-      <div>
+      <div className="input-wrapper">
         <label>
           Ticket Type:
           <select
@@ -53,7 +54,9 @@ const TicketForm = ({ onCreate }) => {
           </select>
         </label>
       </div>
-      <button type="submit">Create Ticket</button>
+      <button className="btn" type="submit">
+        Create Ticket
+      </button>
     </form>
   )
 }

@@ -4,7 +4,8 @@ import { Route, Routes, useNavigate, Navigate } from 'react-router-dom'
 import SignIn from './components/SignIn'
 import SignUp from './components/SignUp'
 import MainContent from './components/MainContent'
-import TicketList from './components/TicketList' // Adjust the path if necessary
+import TicketList from './components/TicketList'
+import Header from './components/Header'
 
 const App = () => {
   const [user, setUser] = useState(null)
@@ -25,27 +26,16 @@ const App = () => {
 
   return (
     <div className="App">
-      <header>
-        {user ? (
-          <>
-            <p>Welcome, {user.email}</p>
-            <button onClick={handleLogOut}>Log Out</button>
-          </>
-        ) : (
-          <p>Please sign in or sign up</p>
-        )}
-      </header>
+      {/* Pass the user and handleLogOut to the Header */}
+      <Header user={user} handleLogout={handleLogOut} />
+
       <main>
         <Routes>
           <Route path="/" element={<Navigate to="/signup" />} />
           <Route path="/MainContent" element={<MainContent />} />
-
           <Route path="/signin" element={<SignIn setUser={setUser} />} />
           <Route path="/signup" element={<SignUp />} />
-          {user && (
-            <Route path="/tickets" element={<TicketList />} /> // Route for TicketList
-          )}
-          {/* Redirect to the ticket list after signing in */}
+          {user && <Route path="/tickets" element={<TicketList />} />}
         </Routes>
       </main>
     </div>

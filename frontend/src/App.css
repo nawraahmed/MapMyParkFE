@@ -1,10 +1,10 @@
 /* TicketStyles.css */
 
 body {
-  font-family: 'Arial', sans-serif;
-  background-color: #f4f4f4; /* Light background for contrast */
+  font-family: 'Georgia', serif;
+  background-color: #f4f4f4;
   margin: 0;
-  padding: 20px;
+  padding: 0;
 }
 
 h1 {
@@ -14,23 +14,35 @@ h1 {
 }
 
 form {
-  background-color: #001f3f; /* Navy background */
-  padding: 20px;
+  background-color: transparent;
+  padding: 50px;
   border-radius: 8px;
   box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
   max-width: 400px;
-  margin: 0 auto 20px auto;
+  margin: 0 auto;
+  display: flex;
+  justify-content: flex-start;
 }
 
 label {
   display: block;
   margin-bottom: 10px;
   font-weight: bold;
-  color: #ff6f61; /* Pink color for labels */
+  color: #dc6472; /* Pink color for labels */
+}
+
+.signInInput {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: border-color 0.3s;
 }
 
 input[type='text'],
-select {
+select,
+input {
   width: 100%;
   padding: 10px;
   margin-top: 5px;
@@ -40,25 +52,31 @@ select {
 }
 
 input[type='text']:focus,
-select:focus {
-  border-color: #ff6f61; /* Pink border on focus */
+select:focus,
+option:focus,
+input[type='password']:focus,
+input[type='email']:focus {
+  border-color: #dc6472; /* Pink border on focus */
   outline: none;
 }
 
-button {
-  background-color: #ff6f61; /* Pink background for buttons */
-  color: white;
+.signInBtn {
+  /* Pink background for buttons */
+  background-color: #fadcde;
+  color: black;
   padding: 10px 15px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   font-size: 16px;
-  width: 100%;
+  width: auto; /* Adjust to prevent the button from taking full width */
+  margin-top: 1.5em; /* Add margin for spacing */
+  align-self: flex-start; /* Align the button with the labels */
   transition: background-color 0.3s, transform 0.2s;
 }
 
-button:hover {
-  background-color: #e95f51; /* Darker pink on hover */
+.signInBtn:hover {
+  /* Darker pink on hover */
   transform: scale(1.05);
 }
 
@@ -99,14 +117,9 @@ li button:hover {
 
 /* Additional Styles for Ticket Types Dropdown */
 select {
-  background-color: #ffffff; /* White background for dropdown */
+  background-color: #ffffff;
 }
 
-select option {
-  padding: 10px;
-  color: #333; /* Dark gray for options */
-  @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
-}
 :root {
   --primary-bg: #000411;
   --link-color-primary: #aeb7b3;
@@ -115,25 +128,18 @@ select option {
   --primary-button-hover: #160c28;
 }
 
-body {
-  font-family: 'Open Sans', sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: var(--secondary-bg);
-}
-
-button {
+/* button {
   border: 0;
   cursor: pointer;
   transition: all 0.2s ease;
   padding: 0.8em 1.2em;
   font-size: 1.1rem;
-}
+} */
 
-button,
+/* button,
 input {
   border-radius: 8px;
-}
+} */
 
 header {
   max-height: 4em;
@@ -180,43 +186,17 @@ main {
   justify-content: center;
 }
 
-.home-container,
 .signin {
   min-height: calc(100vh - 4em);
   align-items: center;
   justify-content: center;
 }
 
-.home-container img {
-  max-width: 80%;
-  margin: 0 auto;
-}
-
-.home-container button {
-  padding: 0.8em 1.2em;
-  background-color: var(--primary-bg);
-  color: var(--link-color-secondary);
-  font-size: 1.1rem;
-}
-
-.home-container button:hover {
-  transform: scale(1.1);
-  background-color: var(--primary-button-hover);
-  box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.3);
-}
-
 .card-overlay {
-  /* border: 2px solid var(--primary-button-hover); */
   width: 60%;
-  padding: 1em;
+  padding-top: 5em;
+  padding-bottom: 5em;
   border-radius: 8px;
-  box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.3);
-}
-
-form,
-.input-wrapper {
-  margin: auto;
-  width: 80%;
 }
 
 form label {
@@ -224,14 +204,22 @@ form label {
 }
 
 .input-wrapper {
-  width: 80%;
+  width: 90%;
   margin: 0;
   padding: 0;
+  margin-top: 1.5em;
 }
 
 .input-wrapper input {
   padding: 0.6em 1.2em;
-  margin: 0.5em auto;
+  width: 100%;
+  border-color: var(--primary-bg);
+  font-size: 1.1rem;
+  outline: none;
+}
+
+.input-wrapper select {
+  padding: 0.6em 1.2em;
   width: 100%;
   border-color: var(--primary-bg);
   font-size: 1.1rem;
@@ -240,14 +228,6 @@ form label {
 
 input::placeholder {
   opacity: 0.7;
-}
-
-form button {
-  background-color: var(--primary-button-hover);
-  margin: 1em 0;
-  color: var(--link-color-secondary);
-  align-self: center;
-  width: 100%;
 }
 
 form button:hover {
@@ -271,7 +251,7 @@ form button:disabled {
   grid-template-columns: repeat(auto-fill, 400px);
 }
 
-.card {
+/* .card {
   width: 350px;
   height: 550px;
   background-color: var(--primary-bg);
@@ -283,15 +263,7 @@ form button:disabled {
 
 .card p {
   height: 50px;
-}
-
-.card h3 {
-  height: 50px;
-}
-
-.card img {
-  width: 100%;
-}
+} */
 
 .protected {
   display: flex;
@@ -301,6 +273,7 @@ form button:disabled {
   height: 80vh;
 }
 
+/** Map styling */
 .mainContentSize {
   height: 90vh;
 }
@@ -351,6 +324,7 @@ form button:disabled {
   font-weight: bold;
 }
 
+/** Header styling */
 .header {
   display: flex;
   justify-content: space-between;
@@ -414,4 +388,57 @@ form button:disabled {
   font-family: 'Georgia', serif;
   color: #000;
   font-weight: bold;
+}
+
+/** Ticket list styling */
+.tickets-content {
+  margin-top: 30px;
+  max-width: 800px; /* Restricts the content width for better readability */
+  margin: 0 auto; /* Centers the content horizontally */
+  padding: 20px;
+}
+
+.tickets-content h1 {
+  text-align: center; /* Centers the title */
+  font-size: 2rem; /* Larger font for the title */
+  margin-bottom: 20px; /* Adds space below the title */
+  color: #333; /* Darker color for contrast */
+}
+
+.tickets-content ul {
+  list-style-type: none; /* Removes default bullet points */
+  padding: 0; /* Removes default padding */
+  margin: 0; /* Removes default margin */
+}
+
+.tickets-content li {
+  display: flex; /* Aligns items horizontally */
+  justify-content: space-between; /* Spreads content evenly */
+  align-items: center; /* Aligns items vertically */
+  padding: 10px; /* Adds space inside each list item */
+  margin-bottom: 10px; /* Adds space between list items */
+  background-color: #fff; /* White background for each ticket */
+  border-radius: 5px; /* Rounds the corners */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow */
+}
+
+.tickets-list {
+  margin-top: 2em;
+}
+
+/** General button styling */
+.btn {
+  background-color: #fadcde;
+  color: black;
+  border: none;
+  padding: 10px 80px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: medium;
+  margin-top: 1em;
+}
+
+.btn:hover {
+  background-color: #dc6472; /* Darker shade on hover */
 }

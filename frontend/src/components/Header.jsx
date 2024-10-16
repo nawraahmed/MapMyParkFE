@@ -1,4 +1,6 @@
-const Header = () => {
+import { Link } from 'react-router-dom'
+
+const Header = ({ user, handleLogout }) => {
   return (
     <header className="header">
       <div className="header-left">
@@ -6,14 +8,24 @@ const Header = () => {
       </div>
       <div className="header-right">
         <nav className="header-nav">
-          <a href="#tickets" className="nav-link">
+          <Link to="/tickets" className="nav-link">
             Tickets
-          </a>
-          <a href="#about" className="nav-link">
+          </Link>
+          <Link to="/about" className="nav-link">
             About
-          </a>
+          </Link>
         </nav>
-        <button className="sign-in-btn">Sign In</button>
+
+        {/* Conditionally render either Sign In or Logout */}
+        {user ? (
+          <button onClick={handleLogout} className="sign-in-btn">
+            Logout
+          </button>
+        ) : (
+          <Link to="/signin">
+            <button className="sign-in-btn">Sign In</button>
+          </Link>
+        )}
       </div>
     </header>
   )

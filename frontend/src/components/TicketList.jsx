@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import TicketForm from './TicketForm'
+import Header from './Header'
+import Footer from './Footer'
 
 const TicketList = () => {
   const [tickets, setTickets] = useState([])
@@ -39,19 +41,23 @@ const TicketList = () => {
 
   return (
     <div>
-      <h1>Your Tickets</h1>
-      <TicketForm
-        onCreate={(newTicket) => setTickets([...tickets, newTicket])}
-      />
-      <ul>
-        {tickets.map((ticket) => (
-          <li key={ticket._id}>
-            {ticket.holderName} - {ticket.ticketType} (Issued on{' '}
-            {new Date(ticket.issueDate).toLocaleDateString()})
-            <button onClick={() => handleDelete(ticket._id)}>Delete</button>
-          </li>
-        ))}
-      </ul>
+      <div className="tickets-content">
+        <h1>Your Tickets</h1>
+        <TicketForm
+          onCreate={(newTicket) => setTickets([...tickets, newTicket])}
+        />
+        <ul className="tickets-list">
+          {tickets.map((ticket) => (
+            <li key={ticket._id}>
+              {ticket.holderName} - {ticket.ticketType} (Issued on{' '}
+              {new Date(ticket.issueDate).toLocaleDateString()})
+              <button className="btn" onClick={() => handleDelete(ticket._id)}>
+                Delete
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   )
 }

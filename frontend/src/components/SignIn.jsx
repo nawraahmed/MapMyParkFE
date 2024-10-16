@@ -36,6 +36,7 @@ const SignIn = ({ setUser }) => {
           <div className="input-wrapper">
             <label htmlFor="email">Email</label>
             <input
+              className="signInInput"
               onChange={handleChange}
               name="email"
               type="email"
@@ -50,18 +51,22 @@ const SignIn = ({ setUser }) => {
               onChange={handleChange}
               type="password"
               name="password"
+              placeholder="Password"
               value={formValues.password}
               required
             />
           </div>
           {error && <p style={{ color: 'red' }}>{error}</p>}
-          <button disabled={!formValues.email || !formValues.password}>
+          <p>
+            Don't have an account? <a href="/signup">Sign Up</a>
+          </p>
+          <button
+            className="btn"
+            disabled={!formValues.email || !formValues.password}
+          >
             Sign In
           </button>
         </form>
-        <p>
-          Don't have an account? <a href="/signup">Sign Up</a>
-        </p>
       </div>
     </div>
   )
