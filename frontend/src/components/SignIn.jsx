@@ -23,7 +23,7 @@ const SignIn = ({ setUser }) => {
       localStorage.setItem('user', JSON.stringify(user));
 
       setUser(user); // Set user state
-      navigate('/'); // Redirect to homepage or dashboard
+      navigate('/MainContent'); 
     } catch (err) {
       console.error('Sign-in failed:', err.response?.data || err.message);
       setError(err.response?.data?.message || 'Invalid credentials');
