@@ -3,29 +3,30 @@ import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
 const SignIn = ({ setUser }) => {
-  const navigate = useNavigate()
-
-  const initialState = { email: '', password: '' }
-  const [formValues, setFormValues] = useState(initialState)
-  const [error, setError] = useState('')
+  const navigate = useNavigate();
+  const [formValues, setFormValues] = useState({ email: '', password: '' });
+  const [error, setError] = useState('');
 
   const handleChange = (e) => {
     setFormValues({ ...formValues, [e.target.name]: e.target.value })
   }
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
+
     try {
-      const response = await axios.post(
-        'http://localhost:4000/auth/login',
-        formValues
-      )
-      const { token, user } = response.data
-      localStorage.setItem('token', token) // Store JWT token
-      setUser(user)
-      navigate('/MainContent')
+      const res = await axios.post('http://localhost:4000/auth/login', formValues);
+      const { token, user } = res.data;
+
+      // Store token and user in localStorage
+      localStorage.setItem('authToken', token);
+      localStorage.setItem('user', JSON.stringify(user));
+
+      setUser(user); // Set user state
+      navigate('/MainContent'); 
     } catch (err) {
-      setError('Invalid email or password')
+      console.error('Sign-in failed:', err.response?.data || err.message);
+      setError(err.response?.data?.message || 'Invalid credentials');
     }
   }
 
@@ -48,11 +49,11 @@ const SignIn = ({ setUser }) => {
           <div className="input-wrapper">
             <label htmlFor="password">Password</label>
             <input
-              onChange={handleChange}
               type="password"
               name="password"
               placeholder="Password"
               value={formValues.password}
+              onChange={handleChange}
               required
             />
           </div>
