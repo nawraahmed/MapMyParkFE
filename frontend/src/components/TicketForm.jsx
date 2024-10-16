@@ -6,21 +6,25 @@ const TicketForm = ({ onCreate }) => {
   const [holderName, setHolderName] = useState('')
   const [ticketType, setTicketType] = useState('Adult') // Default to "Adult"
 
-  const createTicket = async () => {
+  const createTicket = async (e) => {
+    e.preventDefault()
+    const token = localStorage.getItem('token') // Ensure token is sent
     const ticketData = {
-      holderName: holderName,
-      ticketType: ticketType, // Ensure this matches what the server expects
-      issueDate: new Date().toISOString() // Make sure the date is in the correct format
+      holderName,
+      ticketType,
+      issueDate: new Date().toISOString() // Ensure correct date format
     }
 
     try {
-      const response = await ticketApi.createTicket(ticketData)
+      const response = await ticketApi.createTicket(ticketData, {
+        headers: { Authorization: `Bearer ${token}` }
+      })
       onCreate(response.data)
       setHolderName('') // Clear form after submission
-      setTicketType('Adult') // Reset to default value
+      setTicketType('Adult') // Reset to default
     } catch (error) {
       console.error('Error creating ticket:', error)
-      // You can add additional error handling here if needed
+      // Handle error
     }
   }
 
