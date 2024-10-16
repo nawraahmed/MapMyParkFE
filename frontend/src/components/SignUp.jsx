@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -14,15 +14,15 @@ const SignUp = () => {
   const [success, setSuccess] = useState('');
 
   const handleChange = (e) => {
-    setFormValues({ ...formValues, [e.target.name]: e.target.value });
-  };
+    setFormValues({ ...formValues, [e.target.name]: e.target.value })
+  }
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
     if (formValues.password !== formValues.confirmPassword) {
-      setError('Passwords do not match!');
-      return;
+      setError('Passwords do not match!')
+      return
     }
 
     try {
@@ -39,7 +39,7 @@ const SignUp = () => {
       console.error('Signup failed:', err.response?.data || err.message);
       setError(err.response?.data?.message || 'Error signing up.');
     }
-  };
+  }
 
   return (
     <div className="signup col">
@@ -92,13 +92,23 @@ const SignUp = () => {
           {error && <p style={{ color: 'red' }}>{error}</p>}
           {success && <p style={{ color: 'green' }}>{success}</p>}
 
-          <button disabled={!formValues.name || !formValues.email || !formValues.password}>
-            Sign Up
+          <button
+            disabled={
+              !formValues.name ||
+              !formValues.email ||
+              !formValues.password ||
+              formValues.password !== formValues.confirmPassword
+            }
+          >
+            <header>Register</header>
           </button>
         </form>
+        <p>
+          Already have an account? <a href="/signin">Sign In</a>
+        </p>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default SignUp;
+export default SignUp

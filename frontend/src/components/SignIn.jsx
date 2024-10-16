@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
 
 const SignIn = ({ setUser }) => {
   const navigate = useNavigate();
@@ -8,8 +8,8 @@ const SignIn = ({ setUser }) => {
   const [error, setError] = useState('');
 
   const handleChange = (e) => {
-    setFormValues({ ...formValues, [e.target.name]: e.target.value });
-  };
+    setFormValues({ ...formValues, [e.target.name]: e.target.value })
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -28,7 +28,7 @@ const SignIn = ({ setUser }) => {
       console.error('Sign-in failed:', err.response?.data || err.message);
       setError(err.response?.data?.message || 'Invalid credentials');
     }
-  };
+  }
 
   return (
     <div className="signin col">
@@ -60,9 +60,12 @@ const SignIn = ({ setUser }) => {
             Sign In
           </button>
         </form>
+        <p>
+          Don't have an account? <a href="/signup">Sign Up</a>
+        </p>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default SignIn;
+export default SignIn
